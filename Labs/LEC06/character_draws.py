@@ -48,11 +48,14 @@ def move_character_right(y):
 def move_bottom():
     print('BOTTOM')
     for x in range(750, 50, -5):
-        clear_canvas()
-        character.draw(x, 50)
-        update_canvas()
-        delay(0.01)
+        move_character_bottom(x)
     pass
+
+def move_character_bottom(x):
+    clear_canvas()
+    character.draw(x, 50)
+    update_canvas()
+    delay(0.01)
 
 def move_left():
     print('LEFT')
