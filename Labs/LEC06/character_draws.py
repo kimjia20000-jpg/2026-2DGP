@@ -120,11 +120,14 @@ def move_triangle_right():
         x = x0 + (x1 - x0) * t
         y = y0 + (y1 - y0) * t
 
-        clear_canvas()
-        character.draw(x, y)
-        update_canvas()
-        delay(0.01)
+        move_character_triangle_right(x, y)
     pass
+
+def move_character_triangle_right(x, y):
+    clear_canvas()
+    character.draw(x, y)
+    update_canvas()
+    delay(0.01)
 
 def move_triangle_left():
     print('TRIANGLE LEFT')
