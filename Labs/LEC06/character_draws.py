@@ -55,7 +55,7 @@ def move_left():
 
 def move_rectangle():
     print('RECTANGLE')
-    move_top()
+    # move_top()
     move_left()
     move_bottom()
     move_right()
