@@ -47,6 +47,11 @@ def move_character_right(y):
 
 def move_bottom():
     print('BOTTOM')
+    for x in range(750, 50, -5):
+        clear_canvas()
+        character.draw(x, 50)
+        update_canvas()
+        delay(0.01)
     pass
 
 def move_left():
@@ -56,9 +61,9 @@ def move_left():
 def move_rectangle():
     print('RECTANGLE')
     # move_top()
-    move_left()
-    move_bottom()
     move_right()
+    move_bottom()
+    move_left()
     pass
 
 def move_triangle():
