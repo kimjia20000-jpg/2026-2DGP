@@ -135,7 +135,7 @@ def move_triangle_left():
 
 def move_triangle():
     print('TRIANGLE')
-    move_triangle_bottom()
+    # move_triangle_bottom()
     move_triangle_right()
     move_triangle_left()
     pass
