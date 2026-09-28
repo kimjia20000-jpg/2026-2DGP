@@ -157,8 +157,8 @@ def move_character_triangle_left(x, y):
 
 def move_triangle():
     print('TRIANGLE')
-    # move_triangle_bottom()
-    # move_triangle_right()
+    move_triangle_bottom()
+    move_triangle_right()
     move_triangle_left()
     pass
 
