@@ -77,20 +77,42 @@ def move_rectangle():
     move_left()
     pass
 
-def move_triangle_left():
+def move_triangle_bottom():
+    print('TRIANGLE BOTTOM')
+
+    x0 = 100
+    y0 = 100
+
+    x1 = 700
+    y1 = 100
+
+    n = 100
+
+    for step in range(n + 1):
+        t = step / n
+
+        x = x0 + (x1 - x0) * t
+        y = y0 + (y1 - y0) * t
+
+        clear_canvas()
+        character.draw(x, y)
+        update_canvas()
+        delay(0.01)
     pass
 
 def move_triangle_right():
+    print('TRIANGLE RIGHT')
     pass
 
-def move_triangle_bottom():
+def move_triangle_left():
+    print('TRIANGLE LEFT')
     pass
 
 def move_triangle():
     print('TRIANGLE')
-    move_triangle_left()
-    move_triangle_right()
     move_triangle_bottom()
+    move_triangle_right()
+    move_triangle_left()
     pass
 
 while True:
