@@ -105,6 +105,25 @@ def move_character_triangle_bottom(x, y):
 
 def move_triangle_right():
     print('TRIANGLE RIGHT')
+
+    x0 = 700
+    y0 = 100
+
+    x1 = 400
+    y1 = 500
+
+    n = 100
+
+    for step in range(n + 1):
+        t = step / n
+
+        x = x0 + (x1 - x0) * t
+        y = y0 + (y1 - y0) * t
+
+        clear_canvas()
+        character.draw(x, y)
+        update_canvas()
+        delay(0.01)
     pass
 
 def move_triangle_left():
