@@ -12,10 +12,10 @@ def move_circle():
        theta = math.radians(degree)
        x = 400 + 200 * math.cos(theta)
        y = 300 + 200 * math.sin(theta)
-       move_character(x, y)
+       move_character_circle(x, y)
     pass
 
-def move_character(x, y):
+def move_character_circle(x, y):
     clear_canvas()
     character.draw(x, y)
     update_canvas()
@@ -24,10 +24,10 @@ def move_character(x, y):
 def move_top():
     print('TOP')
     for x in range(50, 750, 5):
-        move_character(x)
+        move_character_top(x)
     pass
 
-def move_character(x):
+def move_character_top(x):
     clear_canvas()
     character.draw(x, 550)
     update_canvas()
@@ -36,11 +36,14 @@ def move_character(x):
 def move_right():
     print('RIGHT')
     for y in range(550, 50, -5):
-       clear_canvas()
-       character.draw(750, y)
-       update_canvas()
-       delay(0.01)
+       move_character_right(y)
     pass
+
+def move_character_right(y):
+    clear_canvas()
+    character.draw(750, y)
+    update_canvas()
+    delay(0.01)
 
 def move_bottom():
     print('BOTTOM')
