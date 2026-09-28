@@ -94,11 +94,14 @@ def move_triangle_bottom():
         x = x0 + (x1 - x0) * t
         y = y0 + (y1 - y0) * t
 
-        clear_canvas()
-        character.draw(x, y)
-        update_canvas()
-        delay(0.01)
+        move_character_triangle_bottom(x, y)
     pass
+
+def move_character_triangle_bottom(x, y):
+    clear_canvas()
+    character.draw(x, y)
+    update_canvas()
+    delay(0.01)
 
 def move_triangle_right():
     print('TRIANGLE RIGHT')
