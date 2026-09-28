@@ -8,8 +8,6 @@ character = load_image('character.png')
 def move_circle():
     print('CIRCLE')
     # 캐릭터 이미지 표시
-    character.draw(400, 300)
-
     for degree in range(360):
        theta = math.radians(degree)
        x = 400 + 200 * math.cos(theta)
@@ -21,12 +19,28 @@ def move_circle():
        delay(0.01)
     pass
 
+def move_top():
+    print('TOP')
+    pass
+
+def move_left():
+    print('LEFT')
+    pass
+
+def move_bottom():
+    print('BOTTOM')
+    pass
+
+def move_right():
+    print('RIGHT')
+    pass
+
 def move_rectangle():
     print('RECTANGLE')
-    draw_top()
-    draw_left()
-    draw_bottom()
-    draw_right()
+    move_top()
+    move_left()
+    move_bottom()
+    move_right()
     pass
 
 def move_triangle():
