@@ -93,34 +93,18 @@ def draw_frame(action, frame):
     delay(0.05)
 
 
+def play_action(action):
+    for repeat in range(5):
+        for frame in range(len(ACTIONS[action])):
+            draw_frame(action, frame)
+
+    delay(1.0)
+
+
 while True:
-
-    # 걷기 5회 반복
-    for repeat in range(5):
-        for frame in range(len(ACTIONS[WALK])):
-            draw_frame(WALK, frame)
-
-    delay(1.0)
-
-    # 뛰기 5회 반복
-    for repeat in range(5):
-        for frame in range(len(ACTIONS[RUN])):
-            draw_frame(RUN, frame)
-
-    delay(1.0)
-
-    # 점프 5회 반복
-    for repeat in range(5):
-        for frame in range(len(ACTIONS[JUMP])):
-            draw_frame(JUMP, frame)
-
-    delay(1.0)
-
-    # 공격 5회 반복
-    for repeat in range(5):
-        for frame in range(len(ACTIONS[ATTACK])):
-            draw_frame(ATTACK, frame)
-
-    delay(1.0)
+    play_action(WALK)
+    play_action(RUN)
+    play_action(JUMP)
+    play_action(ATTACK)
 
 close_canvas()
