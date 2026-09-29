@@ -8,20 +8,21 @@ character = load_image('run_animation.png')
 frame = 0
 
 while True:
-    clear_canvas()
+    for x in range(0, 800, 5):
+        clear_canvas()
 
-    grass.draw(400, 30)
+        grass.draw(400, 30)
 
-    character.clip_draw(
-        frame * 100, 0,
-        100, 100,
-        400, 160,
-        100 * 3, 100 * 3
-    )
+        character.clip_draw(
+            frame * 100, 0,
+            100, 100,
+            x, 160,
+            100 * 3, 100 * 3
+        )
 
-    update_canvas()
+        update_canvas()
 
-    frame = (frame + 1) % 8
-    delay(0.05)
+        frame = (frame + 1) % 8
+        delay(0.05)
 
 close_canvas()
