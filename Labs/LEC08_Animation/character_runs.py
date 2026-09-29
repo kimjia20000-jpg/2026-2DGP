@@ -15,7 +15,8 @@ while True:
     character.clip_draw(
         frame * 100, 0,
         100, 100,
-        400, 90
+        400, 140,
+        100 * 2, 100 * 2
     )
 
     update_canvas()
