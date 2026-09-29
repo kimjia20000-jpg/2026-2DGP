@@ -17,28 +17,68 @@ WALK_FRAMES = (
     (1509, 409, 149, 203)
 )
 
-frame = 0
+RUN_FRAMES = (
+    (20, 207, 173, 180),
+    (201, 206, 189, 180),
+    (398, 197, 189, 191),
+    (595, 197, 189, 189),
+    (792, 197, 190, 189),
+    (990, 197, 189, 188),
+    (1187, 199, 189, 188),
+    (1384, 197, 189, 184),
+    (1581, 197, 166, 188)
+)
 
 while True:
-    clear_canvas()
 
-    grass.draw(400, 30)
+    # 걷기 5회 반복
+    for repeat in range(5):
+        for frame in range(len(WALK_FRAMES)):
+            clear_canvas()
 
-    left, bottom, width, height = WALK_FRAMES[frame]
+            grass.draw(400, 30)
 
-    draw_width = width * 1.5
-    draw_height = height * 1.5
+            left, bottom, width, height = WALK_FRAMES[frame]
 
-    character.clip_draw(
-        left, bottom,
-        width, height,
-        400, 30 + draw_height / 2,
-        draw_width, draw_height
-    )
+            draw_width = width * 1.5
+            draw_height = height * 1.5
 
-    update_canvas()
+            character.clip_draw(
+                left, bottom,
+                width, height,
+                400, 30 + draw_height / 2,
+                draw_width, draw_height
+            )
 
-    frame = (frame + 1) % len(WALK_FRAMES)
-    delay(0.05)
+            update_canvas()
+            delay(0.05)
+
+    # 걷기 종료 후 1초 정지
+    delay(1.0)
+
+    # 뛰기 5회 반복
+    for repeat in range(5):
+        for frame in range(len(RUN_FRAMES)):
+            clear_canvas()
+
+            grass.draw(400, 30)
+
+            left, bottom, width, height = RUN_FRAMES[frame]
+
+            draw_width = width * 1.5
+            draw_height = height * 1.5
+
+            character.clip_draw(
+                left, bottom,
+                width, height,
+                400, 30 + draw_height / 2,
+                draw_width, draw_height
+            )
+
+            update_canvas()
+            delay(0.05)
+
+    # 뛰기 종료 후 1초 정지
+    delay(1.0)
 
 close_canvas()
