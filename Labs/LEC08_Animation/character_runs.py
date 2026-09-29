@@ -65,104 +65,61 @@ RUN = 1
 JUMP = 2
 ATTACK = 3
 
+
+def draw_frame(action, frame):
+    clear_canvas()
+
+    grass.draw(400, 30)
+
+    left, bottom, width, height = ACTIONS[action][frame]
+
+    draw_width = width * 1.5
+    draw_height = height * 1.5
+
+    y = 30 + draw_height / 2
+
+    if action == JUMP:
+        jump_height = (bottom - 630) * 1.5
+        y += jump_height
+
+    character.clip_draw(
+        left, bottom,
+        width, height,
+        400, y,
+        draw_width, draw_height
+    )
+
+    update_canvas()
+    delay(0.05)
+
+
 while True:
 
     # 걷기 5회 반복
     for repeat in range(5):
         for frame in range(len(ACTIONS[WALK])):
-            clear_canvas()
-
-            grass.draw(400, 30)
-
-            left, bottom, width, height = ACTIONS[WALK][frame]
-
-            draw_width = width * 1.5
-            draw_height = height * 1.5
-
-            character.clip_draw(
-                left, bottom,
-                width, height,
-                400, 30 + draw_height / 2,
-                draw_width, draw_height
-            )
-
-            update_canvas()
-            delay(0.05)
+            draw_frame(WALK, frame)
 
     delay(1.0)
 
     # 뛰기 5회 반복
     for repeat in range(5):
         for frame in range(len(ACTIONS[RUN])):
-            clear_canvas()
-
-            grass.draw(400, 30)
-
-            left, bottom, width, height = ACTIONS[RUN][frame]
-
-            draw_width = width * 1.5
-            draw_height = height * 1.5
-
-            character.clip_draw(
-                left, bottom,
-                width, height,
-                400, 30 + draw_height / 2,
-                draw_width, draw_height
-            )
-
-            update_canvas()
-            delay(0.05)
+            draw_frame(RUN, frame)
 
     delay(1.0)
 
     # 점프 5회 반복
     for repeat in range(5):
         for frame in range(len(ACTIONS[JUMP])):
-            clear_canvas()
-
-            grass.draw(400, 30)
-
-            left, bottom, width, height = ACTIONS[JUMP][frame]
-
-            draw_width = width * 1.5
-            draw_height = height * 1.5
-
-            jump_height = (bottom - 630) * 1.5
-
-            character.clip_draw(
-                left, bottom,
-                width, height,
-                400,
-                30 + draw_height / 2 + jump_height,
-                draw_width, draw_height
-            )
-
-            update_canvas()
-            delay(0.05)
+            draw_frame(JUMP, frame)
 
     delay(1.0)
 
     # 공격 5회 반복
     for repeat in range(5):
         for frame in range(len(ACTIONS[ATTACK])):
-            clear_canvas()
-
-            grass.draw(400, 30)
-
-            left, bottom, width, height = ACTIONS[ATTACK][frame]
-
-            draw_width = width * 1.5
-            draw_height = height * 1.5
-
-            character.clip_draw(
-                left, bottom,
-                width, height,
-                400, 30 + draw_height / 2,
-                draw_width, draw_height
-            )
-
-            update_canvas()
-            delay(0.05)
+            draw_frame(ATTACK, frame)
 
     delay(1.0)
 
