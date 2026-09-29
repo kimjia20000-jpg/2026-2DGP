@@ -16,6 +16,8 @@ GROUND_Y = 30
 JUMP_BASE_BOTTOM = 630
 
 
+# 각 프레임은 (left, bottom, width, height) 형식으로 저장
+# 프레임마다 width, height가 달라도 사용할 수 있음
 WALK_FRAMES = (
     (26, 404, 135, 208),
     (213, 403, 141, 209),
@@ -29,7 +31,6 @@ WALK_FRAMES = (
 )
 
 
-# 뛰기 프레임 영역 다시 보정
 RUN_FRAMES = (
     (22, 209, 162, 178),
     (203, 209, 173, 174),
@@ -56,7 +57,7 @@ JUMP_FRAMES = (
 )
 
 
-# 공격은 실제 이미지 기준 8프레임으로 다시 분할
+# Attack은 다른 애니메이션과 달리 8프레임
 ATTACK_FRAMES = (
     (24, 10, 193, 165),
     (222, 10, 172, 183),
@@ -69,6 +70,7 @@ ATTACK_FRAMES = (
 )
 
 
+# 애니메이션마다 서로 다른 개수의 프레임을 가질 수 있음
 ACTIONS = (
     WALK_FRAMES,
     RUN_FRAMES,
@@ -89,12 +91,13 @@ ACTION_SEQUENCE = (
 )
 
 
-def draw_frame(action, frame):
+def draw_frame(action, frame_data):
     clear_canvas()
 
     grass.draw(400, GROUND_Y)
 
-    left, bottom, width, height = ACTIONS[action][frame]
+    # 현재 프레임마다 다른 위치와 크기를 그대로 사용
+    left, bottom, width, height = frame_data
 
     draw_width = width * DRAW_SCALE
     draw_height = height * DRAW_SCALE
@@ -117,9 +120,15 @@ def draw_frame(action, frame):
 
 
 def play_action(action):
+    # 현재 애니메이션의 프레임 목록
+    frames = ACTIONS[action]
+
     for repeat in range(ACTION_REPEAT):
-        for frame in range(len(ACTIONS[action])):
-            draw_frame(action, frame)
+
+        # 프레임 개수를 고정하지 않고
+        # 현재 애니메이션에 들어 있는 프레임만큼 반복
+        for frame_data in frames:
+            draw_frame(action, frame_data)
 
     delay(ACTION_PAUSE)
 
