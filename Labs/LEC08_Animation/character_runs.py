@@ -76,6 +76,13 @@ RUN = 1
 JUMP = 2
 ATTACK = 3
 
+ACTION_SEQUENCE = (
+    WALK,
+    RUN,
+    JUMP,
+    ATTACK
+)
+
 
 def draw_frame(action, frame):
     clear_canvas()
@@ -113,9 +120,7 @@ def play_action(action):
 
 
 while True:
-    play_action(WALK)
-    play_action(RUN)
-    play_action(JUMP)
-    play_action(ATTACK)
+    for action in ACTION_SEQUENCE:
+        play_action(action)
 
 close_canvas()
