@@ -19,39 +19,20 @@ DRAW_HEIGHT = 320
 frame = 0
 
 while True:
-    for x in range(160, 641, 5):
-        clear_canvas()
+    clear_canvas()
 
-        grass.draw(400, 30)
+    grass.draw(400, 30)
 
-        character.clip_draw(
-            frame * FRAME_WIDTH, RUN_Y,
-            FRAME_WIDTH, FRAME_HEIGHT,
-            x, 190,
-            DRAW_WIDTH, DRAW_HEIGHT
-        )
+    character.clip_draw(
+        frame * FRAME_WIDTH, RUN_Y,
+        FRAME_WIDTH, FRAME_HEIGHT,
+        400, 190,
+        DRAW_WIDTH, DRAW_HEIGHT
+    )
 
-        update_canvas()
+    update_canvas()
 
-        frame = (frame + 1) % 8
-        delay(0.05)
-
-    for x in range(640, 159, -5):
-        clear_canvas()
-
-        grass.draw(400, 30)
-
-        character.clip_composite_draw(
-            frame * FRAME_WIDTH, RUN_Y,
-            FRAME_WIDTH, FRAME_HEIGHT,
-            0, 'h',
-            x, 190,
-            DRAW_WIDTH, DRAW_HEIGHT
-        )
-
-        update_canvas()
-
-        frame = (frame + 1) % 8
-        delay(0.05)
+    frame = (frame + 1) % 8
+    delay(0.05)
 
 close_canvas()
