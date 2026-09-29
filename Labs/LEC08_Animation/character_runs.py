@@ -5,8 +5,10 @@ open_canvas()
 grass = load_image('grass.png')
 character = load_image('run_animation.png')
 
-# fill here
+while True:
+    clear_canvas()
 
+    update_canvas()
+    delay(0.05)
 
 close_canvas()
-
