@@ -53,16 +53,28 @@ ATTACK_FRAMES = (
     (1577, 8, 170, 161)
 )
 
+ACTIONS = (
+    WALK_FRAMES,
+    RUN_FRAMES,
+    JUMP_FRAMES,
+    ATTACK_FRAMES
+)
+
+WALK = 0
+RUN = 1
+JUMP = 2
+ATTACK = 3
+
 while True:
 
     # 걷기 5회 반복
     for repeat in range(5):
-        for frame in range(len(WALK_FRAMES)):
+        for frame in range(len(ACTIONS[WALK])):
             clear_canvas()
 
             grass.draw(400, 30)
 
-            left, bottom, width, height = WALK_FRAMES[frame]
+            left, bottom, width, height = ACTIONS[WALK][frame]
 
             draw_width = width * 1.5
             draw_height = height * 1.5
@@ -81,12 +93,12 @@ while True:
 
     # 뛰기 5회 반복
     for repeat in range(5):
-        for frame in range(len(RUN_FRAMES)):
+        for frame in range(len(ACTIONS[RUN])):
             clear_canvas()
 
             grass.draw(400, 30)
 
-            left, bottom, width, height = RUN_FRAMES[frame]
+            left, bottom, width, height = ACTIONS[RUN][frame]
 
             draw_width = width * 1.5
             draw_height = height * 1.5
@@ -105,12 +117,12 @@ while True:
 
     # 점프 5회 반복
     for repeat in range(5):
-        for frame in range(len(JUMP_FRAMES)):
+        for frame in range(len(ACTIONS[JUMP])):
             clear_canvas()
 
             grass.draw(400, 30)
 
-            left, bottom, width, height = JUMP_FRAMES[frame]
+            left, bottom, width, height = ACTIONS[JUMP][frame]
 
             draw_width = width * 1.5
             draw_height = height * 1.5
@@ -120,7 +132,8 @@ while True:
             character.clip_draw(
                 left, bottom,
                 width, height,
-                400, 30 + draw_height / 2 + jump_height,
+                400,
+                30 + draw_height / 2 + jump_height,
                 draw_width, draw_height
             )
 
@@ -131,12 +144,12 @@ while True:
 
     # 공격 5회 반복
     for repeat in range(5):
-        for frame in range(len(ATTACK_FRAMES)):
+        for frame in range(len(ACTIONS[ATTACK])):
             clear_canvas()
 
             grass.draw(400, 30)
 
-            left, bottom, width, height = ATTACK_FRAMES[frame]
+            left, bottom, width, height = ACTIONS[ATTACK][frame]
 
             draw_width = width * 1.5
             draw_height = height * 1.5
@@ -151,7 +164,6 @@ while True:
             update_canvas()
             delay(0.05)
 
-    # 공격 종료 후 1초 정지
     delay(1.0)
 
 close_canvas()
