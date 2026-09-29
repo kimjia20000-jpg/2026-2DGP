@@ -5,6 +5,17 @@ open_canvas()
 grass = load_image('grass.png')
 character = load_image('samuriSheet.png')
 
+# 애니메이션 설정값
+ACTION_REPEAT = 5
+ACTION_PAUSE = 1.0
+FRAME_DELAY = 0.05
+DRAW_SCALE = 1.5
+
+CHARACTER_X = 400
+GROUND_Y = 30
+JUMP_BASE_BOTTOM = 630
+
+
 WALK_FRAMES = (
     (26, 404, 135, 208),
     (213, 403, 141, 209),
@@ -69,36 +80,36 @@ ATTACK = 3
 def draw_frame(action, frame):
     clear_canvas()
 
-    grass.draw(400, 30)
+    grass.draw(400, GROUND_Y)
 
     left, bottom, width, height = ACTIONS[action][frame]
 
-    draw_width = width * 1.5
-    draw_height = height * 1.5
+    draw_width = width * DRAW_SCALE
+    draw_height = height * DRAW_SCALE
 
-    y = 30 + draw_height / 2
+    y = GROUND_Y + draw_height / 2
 
     if action == JUMP:
-        jump_height = (bottom - 630) * 1.5
+        jump_height = (bottom - JUMP_BASE_BOTTOM) * DRAW_SCALE
         y += jump_height
 
     character.clip_draw(
         left, bottom,
         width, height,
-        400, y,
+        CHARACTER_X, y,
         draw_width, draw_height
     )
 
     update_canvas()
-    delay(0.05)
+    delay(FRAME_DELAY)
 
 
 def play_action(action):
-    for repeat in range(5):
+    for repeat in range(ACTION_REPEAT):
         for frame in range(len(ACTIONS[action])):
             draw_frame(action, frame)
 
-    delay(1.0)
+    delay(ACTION_PAUSE)
 
 
 while True:
