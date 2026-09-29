@@ -41,6 +41,18 @@ JUMP_FRAMES = (
     (1571, 630, 171, 155)
 )
 
+ATTACK_FRAMES = (
+    (24, 10, 173, 165),
+    (197, 9, 197, 184),
+    (394, 10, 197, 187),
+    (591, 8, 197, 189),
+    (788, 8, 198, 178),
+    (986, 8, 197, 169),
+    (1183, 8, 197, 163),
+    (1380, 8, 197, 165),
+    (1577, 8, 170, 161)
+)
+
 while True:
 
     # 걷기 5회 반복
@@ -65,7 +77,6 @@ while True:
             update_canvas()
             delay(0.05)
 
-    # 걷기 종료 후 1초 정지
     delay(1.0)
 
     # 뛰기 5회 반복
@@ -90,7 +101,6 @@ while True:
             update_canvas()
             delay(0.05)
 
-    # 뛰기 종료 후 1초 정지
     delay(1.0)
 
     # 점프 5회 반복
@@ -110,15 +120,38 @@ while True:
             character.clip_draw(
                 left, bottom,
                 width, height,
-                400,
-                30 + draw_height / 2 + jump_height,
+                400, 30 + draw_height / 2 + jump_height,
                 draw_width, draw_height
             )
 
             update_canvas()
             delay(0.05)
 
-    # 점프 종료 후 1초 정지
+    delay(1.0)
+
+    # 공격 5회 반복
+    for repeat in range(5):
+        for frame in range(len(ATTACK_FRAMES)):
+            clear_canvas()
+
+            grass.draw(400, 30)
+
+            left, bottom, width, height = ATTACK_FRAMES[frame]
+
+            draw_width = width * 1.5
+            draw_height = height * 1.5
+
+            character.clip_draw(
+                left, bottom,
+                width, height,
+                400, 30 + draw_height / 2,
+                draw_width, draw_height
+            )
+
+            update_canvas()
+            delay(0.05)
+
+    # 공격 종료 후 1초 정지
     delay(1.0)
 
 close_canvas()
