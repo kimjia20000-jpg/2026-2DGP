@@ -10,6 +10,12 @@ while True:
 
     grass.draw(400, 30)
 
+    character.clip_draw(
+        0, 0,
+        100, 100,
+        400, 90
+    )
+
     update_canvas()
     delay(0.05)
 
