@@ -8,6 +8,8 @@ character = load_image('run_animation.png')
 while True:
     clear_canvas()
 
+    grass.draw(400, 30)
+
     update_canvas()
     delay(0.05)
 
