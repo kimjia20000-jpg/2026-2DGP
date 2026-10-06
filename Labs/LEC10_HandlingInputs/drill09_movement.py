@@ -14,11 +14,13 @@ frame = 0
 
 right_pressed = False
 left_pressed = False
-up_pressed = False  # 위쪽 키 상태 추가
+up_pressed = False
+down_pressed = False  # 아래쪽 키 상태 추가
 
 
 def handle_events():
-    global running, right_pressed, left_pressed, up_pressed
+    global running
+    global right_pressed, left_pressed, up_pressed, down_pressed
 
     events = get_events()
 
@@ -39,6 +41,9 @@ def handle_events():
             elif event.key == SDLK_UP:
                 up_pressed = True
 
+            elif event.key == SDLK_DOWN:
+                down_pressed = True
+
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_RIGHT:
                 right_pressed = False
@@ -49,6 +54,9 @@ def handle_events():
             elif event.key == SDLK_UP:
                 up_pressed = False
 
+            elif event.key == SDLK_DOWN:
+                down_pressed = False
+
 
 while running:
     handle_events()
@@ -57,11 +65,10 @@ while running:
         break
 
     dir_x = int(right_pressed) - int(left_pressed)
-    x += dir_x * 5
+    dir_y = int(up_pressed) - int(down_pressed)
 
-    # 위쪽 키를 누르는 동안 위로 이동
-    if up_pressed:
-        y += 5
+    x += dir_x * 5
+    y += dir_y * 5
 
     clear_canvas()
 
