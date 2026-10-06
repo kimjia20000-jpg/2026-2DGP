@@ -15,7 +15,7 @@ frame = 0
 right_pressed = False
 left_pressed = False
 up_pressed = False
-down_pressed = False  # 아래쪽 키 상태 추가
+down_pressed = False
 
 
 def handle_events():
@@ -70,12 +70,20 @@ while running:
     x += dir_x * 5
     y += dir_y * 5
 
+    # 가로 또는 세로 이동 입력이 있는지 확인
+    moving = dir_x != 0 or dir_y != 0
+
     clear_canvas()
 
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
     character.clip_draw(frame * 100, 100, 100, 100, x, y)
 
     update_canvas()
+
+    # 이동 중에만 0~7번 프레임을 순환
+    if moving:
+        frame = (frame + 1) % 8
+
     delay(0.05)
 
 close_canvas()
