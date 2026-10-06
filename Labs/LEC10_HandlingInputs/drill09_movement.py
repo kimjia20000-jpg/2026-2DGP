@@ -12,6 +12,9 @@ running = True
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 
+# 마지막으로 바라본 방향: 오른쪽 1, 왼쪽 -1
+direction = 1
+
 right_pressed = False
 left_pressed = False
 up_pressed = False
@@ -70,17 +73,31 @@ while running:
     x += dir_x * 5
     y += dir_y * 5
 
-    # 가로 또는 세로 이동 입력이 있는지 확인
     moving = dir_x != 0 or dir_y != 0
+
+    # 좌우 이동이 있을 때만 바라보는 방향 변경
+    if dir_x > 0:
+        direction = 1
+    elif dir_x < 0:
+        direction = -1
+
+    # 방향에 맞는 달리기 행 선택
+    if direction == 1:
+        action_row = 1
+    else:
+        action_row = 0
 
     clear_canvas()
 
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100, 100, 100, x, y)
+
+    character.clip_draw(
+        frame * 100, action_row * 100,
+        100, 100, x, y
+    )
 
     update_canvas()
 
-    # 이동 중에만 0~7번 프레임을 순환
     if moving:
         frame = (frame + 1) % 8
 
