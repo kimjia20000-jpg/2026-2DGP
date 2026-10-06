@@ -4,10 +4,16 @@ TUK_WIDTH, TUK_HEIGHT = 1280, 1024
 
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 
-# 배경 이미지 불러오기
 tuk_ground = load_image('TUK_GROUND.png')
 
+# 캐릭터 스프라이트 이미지 불러오기
+character = load_image('animation_sheet.png')
+
 running = True
+
+# 캐릭터의 초기 위치와 프레임
+x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
+frame = 0
 
 
 def handle_events():
@@ -32,8 +38,10 @@ while running:
 
     clear_canvas()
 
-    # 화면 중앙에 배경 출력
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+
+    # 캐릭터 한 프레임을 배경 위에 출력
+    character.clip_draw(frame * 100, 100, 100, 100, x, y)
 
     update_canvas()
     delay(0.05)
