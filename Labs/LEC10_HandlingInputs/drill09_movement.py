@@ -11,9 +11,10 @@ running = True
 
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
-
-# 마지막으로 바라본 방향: 오른쪽 1, 왼쪽 -1
 direction = 1
+
+# 이전 애니메이션 행을 저장
+previous_action_row = None
 
 right_pressed = False
 left_pressed = False
@@ -75,17 +76,32 @@ while running:
 
     moving = dir_x != 0 or dir_y != 0
 
-    # 좌우 이동이 있을 때만 바라보는 방향 변경
     if dir_x > 0:
         direction = 1
     elif dir_x < 0:
         direction = -1
 
-    # 방향에 맞는 달리기 행 선택
-    if direction == 1:
-        action_row = 1
+    # 이동 여부와 방향에 따라 애니메이션 선택
+    if moving:
+        frame_count = 8
+
+        if direction == 1:
+            action_row = 1
+        else:
+            action_row = 0
+
     else:
-        action_row = 0
+        frame_count = 5
+
+        if direction == 1:
+            action_row = 3
+        else:
+            action_row = 2
+
+    # 애니메이션이 바뀌면 첫 프레임부터 시작
+    if action_row != previous_action_row:
+        frame = 0
+        previous_action_row = action_row
 
     clear_canvas()
 
@@ -98,8 +114,8 @@ while running:
 
     update_canvas()
 
-    if moving:
-        frame = (frame + 1) % 8
+    # 이동 중과 정지 중 모두 해당 애니메이션 재생
+    frame = (frame + 1) % frame_count
 
     delay(0.05)
 
