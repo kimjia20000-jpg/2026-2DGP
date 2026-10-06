@@ -5,19 +5,19 @@ TUK_WIDTH, TUK_HEIGHT = 1280, 1024
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 
 tuk_ground = load_image('TUK_GROUND.png')
-
-# 캐릭터 스프라이트 이미지 불러오기
 character = load_image('animation_sheet.png')
 
 running = True
 
-# 캐릭터의 초기 위치와 프레임
 x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 
+# 오른쪽 방향키를 누르고 있는지 저장
+right_pressed = False
+
 
 def handle_events():
-    global running
+    global running, right_pressed
 
     events = get_events()
 
@@ -29,6 +29,15 @@ def handle_events():
             if event.key == SDLK_ESCAPE:
                 running = False
 
+            # 오른쪽 키를 누르면 이동 시작
+            elif event.key == SDLK_RIGHT:
+                right_pressed = True
+
+        elif event.type == SDL_KEYUP:
+            # 오른쪽 키를 떼면 이동 중지
+            if event.key == SDLK_RIGHT:
+                right_pressed = False
+
 
 while running:
     handle_events()
@@ -36,11 +45,13 @@ while running:
     if not running:
         break
 
+    # 오른쪽 키를 누르는 동안 위치 변경
+    if right_pressed:
+        x += 5
+
     clear_canvas()
 
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-
-    # 캐릭터 한 프레임을 배경 위에 출력
     character.clip_draw(frame * 100, 100, 100, 100, x, y)
 
     update_canvas()
