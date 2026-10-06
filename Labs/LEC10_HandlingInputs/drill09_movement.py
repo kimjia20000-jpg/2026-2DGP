@@ -2,6 +2,9 @@ from pico2d import *
 
 TUK_WIDTH, TUK_HEIGHT = 1280, 1024
 
+# 캐릭터 프레임 크기
+CHARACTER_WIDTH, CHARACTER_HEIGHT = 100, 100
+
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 
 tuk_ground = load_image('TUK_GROUND.png')
@@ -13,7 +16,6 @@ x, y = TUK_WIDTH // 2, TUK_HEIGHT // 2
 frame = 0
 direction = 1
 
-# 이전 애니메이션 행을 저장
 previous_action_row = None
 
 right_pressed = False
@@ -74,6 +76,16 @@ while running:
     x += dir_x * 5
     y += dir_y * 5
 
+    # 캐릭터 전체가 화면 안에 있도록 좌표 제한
+    x = max(
+        CHARACTER_WIDTH // 2,
+        min(TUK_WIDTH - CHARACTER_WIDTH // 2, x)
+    )
+    y = max(
+        CHARACTER_HEIGHT // 2,
+        min(TUK_HEIGHT - CHARACTER_HEIGHT // 2, y)
+    )
+
     moving = dir_x != 0 or dir_y != 0
 
     if dir_x > 0:
@@ -81,7 +93,6 @@ while running:
     elif dir_x < 0:
         direction = -1
 
-    # 이동 여부와 방향에 따라 애니메이션 선택
     if moving:
         frame_count = 8
 
@@ -98,7 +109,6 @@ while running:
         else:
             action_row = 2
 
-    # 애니메이션이 바뀌면 첫 프레임부터 시작
     if action_row != previous_action_row:
         frame = 0
         previous_action_row = action_row
@@ -108,13 +118,16 @@ while running:
     tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
 
     character.clip_draw(
-        frame * 100, action_row * 100,
-        100, 100, x, y
+        frame * CHARACTER_WIDTH,
+        action_row * CHARACTER_HEIGHT,
+        CHARACTER_WIDTH,
+        CHARACTER_HEIGHT,
+        x,
+        y
     )
 
     update_canvas()
 
-    # 이동 중과 정지 중 모두 해당 애니메이션 재생
     frame = (frame + 1) % frame_count
 
     delay(0.05)
