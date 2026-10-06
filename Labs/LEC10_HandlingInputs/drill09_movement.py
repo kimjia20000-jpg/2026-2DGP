@@ -4,6 +4,9 @@ TUK_WIDTH, TUK_HEIGHT = 1280, 1024
 
 open_canvas(TUK_WIDTH, TUK_HEIGHT)
 
+# 배경 이미지 불러오기
+tuk_ground = load_image('TUK_GROUND.png')
+
 running = True
 
 
@@ -28,6 +31,10 @@ while running:
         break
 
     clear_canvas()
+
+    # 화면 중앙에 배경 출력
+    tuk_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+
     update_canvas()
     delay(0.05)
 
