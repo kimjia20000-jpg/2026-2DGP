@@ -32,7 +32,7 @@ class Boy:
     def draw(self):
         self.image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
 
-class Ball:
+class SmallBall:
     def __init__(self):
         self.x = random.randint(100, 700)
         self.y = random.randint(100, 700)
@@ -43,6 +43,18 @@ class Ball:
 
     def update(self):
         pass
+
+class BigBall:
+    def __init__(self):
+            self.x = random.randint(100, 700)
+            self.y = random.randint(100, 700)
+            self.image = load_image('ball41x41.png')
+    
+    def draw(self):
+            self.image.draw(self.x, self.y)
+    
+    def update(self):
+            pass
 
 def handle_events():
     global running
@@ -66,8 +78,11 @@ def reset_world():
     team = [Boy() for i in range(11)] # 11명의 소년 객체를 생성하여 team 리스트에 넣는다.
     world += team # world 리스트에 team 리스트를 합친다.
 
-    balls = [Ball() for i in range(20)]
+    balls = [SmallBall() for i in range(10)]
     world += balls
+
+    ballss = [BigBall() for i in range(10)]
+    world += ballss
 
 def update_world():
     for o in world:
