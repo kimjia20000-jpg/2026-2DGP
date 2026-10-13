@@ -34,7 +34,15 @@ class Boy:
 
 class Ball:
     def __init__(self):
-        self.image = load_image
+        self.x = 400
+        self.y = 30
+        self.image = load_image('ball21x21.png')
+
+    def draw(self):
+        self.image.draw(400,300)
+
+    def update(self):
+        pass
 
 def handle_events():
     global running
@@ -58,6 +66,8 @@ def reset_world():
     team = [Boy() for i in range(11)] # 11명의 소년 객체를 생성하여 team 리스트에 넣는다.
     world += team # world 리스트에 team 리스트를 합친다.
 
+    ball = Ball()
+    world.append(ball)
 
 def update_world():
     for o in world:
