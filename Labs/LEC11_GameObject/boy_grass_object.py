@@ -35,7 +35,7 @@ class Boy:
 class SmallBall:
     def __init__(self):
         self.x = random.randint(100, 700)
-        self.y = random.randint(100, 700)
+        self.y = random.randint(500, 700)
         self.image = load_image('ball21x21.png')
 
     def draw(self):
@@ -43,13 +43,13 @@ class SmallBall:
 
     def update(self):
         if self.y > 30:
-            self.y -= 5
+            self.y -= random.randint(1,10)
         
 
 class BigBall:
     def __init__(self):
             self.x = random.randint(100, 700)
-            self.y = random.randint(100, 700)
+            self.y = random.randint(500, 700)
             self.image = load_image('ball41x41.png')
     
     def draw(self):
@@ -57,7 +57,7 @@ class BigBall:
     
     def update(self):
             if self.y > 30:
-                self.y -= 5
+                self.y -= random.randint(1,20)
             
 
 def handle_events():
