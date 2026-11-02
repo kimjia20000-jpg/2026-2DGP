@@ -10,3 +10,6 @@ class Grass:
 
     def update(self):
         pass
+
+class Grass2:
+    pass
