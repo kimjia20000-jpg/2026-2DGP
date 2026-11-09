@@ -6,6 +6,7 @@ import game_framework
 import game_world
 import title_mode
 import pause_mode
+import item_mode
 
 from boy import Boy
 from grass import Grass
@@ -13,6 +14,9 @@ from grass import Grass
 
 def init():
     global boy
+    global pause_started_at
+
+    pause_started_at = None
 
     grass = Grass()
     game_world.add_object(grass, 0)
@@ -26,26 +30,23 @@ def finish():
 
 
 def pause():
-    global pause_started_at
-
-    # 정지 중 키를 놓더라도 이동 입력이 남지 않도록 처리한다.
-    boy.handle_event(
-        SimpleNamespace(type=SDL_KEYUP, key=SDLK_LEFT)
-    )
-    boy.handle_event(
-        SimpleNamespace(type=SDL_KEYUP, key=SDLK_RIGHT)
-    )
-
-    pause_started_at = get_time()
+    # 모드를 올리는 것만으로 게임을 정지시키지는 않는다.
+    pass
 
 
 def resume():
-    # 정지한 시간은 IDLE의 잠들기 대기 시간에서 제외한다.
-    paused_duration = get_time() - pause_started_at
-    boy.idle_started_at += paused_duration
+    global pause_started_at
+
+    # P로 일시정지한 경우에만 타이머를 보정한다.
+    if pause_started_at is not None:
+        paused_duration = get_time() - pause_started_at
+        boy.idle_started_at += paused_duration
+        pause_started_at = None
 
 
 def handle_events():
+    global pause_started_at
+
     for event in get_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
@@ -59,7 +60,24 @@ def handle_events():
             if getattr(event, 'repeat', 0):
                 continue
 
+            # 실제 일시정지는 P를 눌렀을 때만 처리한다.
+            boy.handle_event(
+                SimpleNamespace(type=SDL_KEYUP, key=SDLK_LEFT)
+            )
+            boy.handle_event(
+                SimpleNamespace(type=SDL_KEYUP, key=SDLK_RIGHT)
+            )
+
+            pause_started_at = get_time()
             game_framework.push_mode(pause_mode)
+            return
+
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_i:
+            if getattr(event, 'repeat', 0):
+                continue
+
+            # 이동 입력과 타이머를 유지한 채 아이템 창을 연다.
+            game_framework.push_mode(item_mode)
             return
 
         else:
